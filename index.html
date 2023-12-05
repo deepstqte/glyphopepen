@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glyphopepen</title>
+    <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        h2 {
+/*            background-color: #2D3E67;*/
+            color: #2D3E67;
+/*            padding: 10px 20px;*/
+            margin: 20;
+        }
+
+        /*#settingsPane {
+            background-color: #fff;
+            width: 250px;
+            height: 100vh;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            position: fixed;
+            overflow-y: auto;
+        }*/
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+        }
+
+        /* Styles for the settingsPane (Left Sidebar) */
+        #settingsPane {
+            width: 20%; /* Adjust this value as needed */
+            min-width: 200px; /* Set a minimum width for the sidebar */
+            height: 100vh; /* Makes the sidebar span the full height of the viewport */
+            background-color: #DDE1E4;
+            border-right: 1px solid #e0e0e0; /* A subtle border to separate the sidebar from the main content */
+            overflow-y: auto; /* Enables scrolling if content exceeds sidebar height */
+            padding: 20px;
+        }
+
+        main {
+            background-color: #f4f4f4; /* Background color */
+            padding: 20px;
+            display: flex;
+            justify-content: center; /* Centers content horizontally */
+            align-items: center; /* Centers content vertically */
+            height: 1000px; /* This makes sure the mainContent takes up the entire height of the viewport */
+            box-sizing: border-box; /* This ensures padding is included in the height */
+/*            max-height: 1000px;*/
+/*            overflow: auto;*/
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        /* Additional styles to make things look better */
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #2D3E67;
+            margin-bottom: 20px;
+            color: #DDE1E4;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+         /* Additional styles to make things look better */
+        img {
+            border: 2px solid;
+        }
+
+    </style>
+</head>
+<body>
+  <div id="settingsPane">
+    <label for="edition">Edition Size:</label>
+    <select id="edition">
+        <!-- Options will be populated here using JavaScript -->
+    </select>
+    <script>
+        let editionSelectElement = document.getElementById('edition');
+
+        // Iterate through the keys of the agents object
+        for (let key in editions) {
+            // Create a new option element
+            let editionOptionElement = document.createElement('option');
+            editionOptionElement.value = editions[key];
+            editionOptionElement.textContent = key;
+            
+            // Append the option to the select element
+            editionSelectElement.appendChild(editionOptionElement);
+        }
+    </script>
+
+    <button onclick="generateArt()">Generate Art</button>
+  </div>
+  <div id="mainContent">
+      <!-- Display generated art or other content here -->
+  </div>
+</body>
+</html>
