@@ -121,8 +121,8 @@ let editions = {
   "four": "four",
   "five": "five",
   "ten": "ten",
-  // "twenty": "twenty",
-  // "forty": "forty",
+  "twenty": "twenty",
+  "forty": "forty",
 };
 
 function setup() {
@@ -189,8 +189,14 @@ function generateArt() {
       }
     }
   } else if (document.getElementById('edition').value == "ten") {
-    glyphBackgroundColor = color(294,100,72);
-    glyphStrokeColor = color(332, 80, 48);
+    var coinflip = random(2);
+    if (coinflip < 1) {
+      glyphBackgroundColor = color(294,100,72);
+      glyphStrokeColor = color(332, 80, 48);
+    } else {
+      glyphStrokeColor = color(294,100,72);
+      glyphBackgroundColor = color(332, 80, 48);
+    }
     glyphFillColor = color(204,9,11);
     for (var j = 0; j < canvasSizeOg/ppd; j++) {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
@@ -199,6 +205,63 @@ function generateArt() {
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
+  } else if (document.getElementById('edition').value == "twenty") {
+    var coinflip = random(6);
+    if (coinflip < 1) {
+      glyphBackgroundColor = color(175,94,82);
+      glyphStrokeColor = color(264, 91, 83);
+      glyphFillColor = color(220,91,75);
+    } else if (coinflip < 2) {
+      glyphBackgroundColor = color(175,94,82);
+      glyphFillColor = color(264, 91, 83);
+      glyphStrokeColor = color(220,91,75);
+    } else if (coinflip < 3) {
+      glyphFillColor = color(175,94,82);
+      glyphStrokeColor = color(264, 91, 83);
+      glyphBackgroundColor = color(220,91,75);
+    } else if (coinflip < 4) {
+      glyphFillColor = color(175,94,82);
+      glyphBackgroundColor = color(264, 91, 83);
+      glyphStrokeColor = color(220,91,75);
+    } else if (coinflip < 5) {
+      glyphStrokeColor = color(175,94,82);
+      glyphFillColor = color(264, 91, 83);
+      glyphBackgroundColor = color(220,91,75);
+    } else if (coinflip < 6) {
+      glyphStrokeColor = color(175,94,82);
+      glyphBackgroundColor = color(264, 91, 83);
+      glyphFillColor = color(220,91,75);
+    }
+    for (var j = 0; j < canvasSizeOg/ppd; j++) {
+      for (var k = 0; k < canvasSizeOg/ppd; k++) {
+        noStroke();
+        fill(175, 94, random(90, 100));
+        rect(ppd*j, ppd*k, ppd, ppd);
+      }
+    }
+  } else if (document.getElementById('edition').value == "forty") {
+    var coinflip = random(2);
+    if (coinflip < 1) {
+      glyphFillColor = color(116,47,40);
+      for (var j = 0; j < canvasSizeOg/ppd; j++) {
+        for (var k = 0; k < canvasSizeOg/ppd; k++) {
+          noStroke();
+          fill(357, 85, random(70, 90));
+          rect(ppd*j, ppd*k, ppd, ppd);
+        }
+      }
+    } else {
+      glyphFillColor = color(357,85,55);
+      for (var j = 0; j < canvasSizeOg/ppd; j++) {
+        for (var k = 0; k < canvasSizeOg/ppd; k++) {
+          noStroke();
+          fill(116, 47, random(70, 90));
+          rect(ppd*j, ppd*k, ppd, ppd);
+        }
+      }
+    }
+    glyphBackgroundColor = color(0,0,0);
+    glyphStrokeColor = color(0, 0, 100);
   }
   
   translate(canvasSizeOg/4, ppd*8);
