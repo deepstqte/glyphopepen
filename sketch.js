@@ -162,13 +162,13 @@ function drawGlyph(matrix, ppd, fillColor, strokeColor, backgroundColor, moveFac
         fill(hue(fillColor), saturation(fillColor), random(minFillLight, maxFillLight));
         rect(moveX + x * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
 
-        fill(hue(fillColor), saturation(fillColor), random(minFillLight, maxFillLight));
+        // fill(hue(fillColor), saturation(fillColor), random(minFillLight, maxFillLight));
         rect(moveX + (matrix.length - x - 1) * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
       } else if (countNeighbors(matrix, x, y) > 0) {
         fill(hue(strokeColor), saturation(strokeColor), random(minStrokeLight, maxStrokeLight));
         rect(moveX + x * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
 
-        fill(hue(strokeColor), saturation(strokeColor), random(minStrokeLight, maxStrokeLight));
+        // fill(hue(strokeColor), saturation(strokeColor), random(minStrokeLight, maxStrokeLight));
         rect(moveX + (matrix.length - x - 1) * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
       } else {
         continue;
