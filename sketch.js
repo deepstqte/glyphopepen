@@ -1,5 +1,7 @@
 const hexToDecimal = hex => parseInt(hex, 16);
 const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
+let canvasSizeOg = 3200;
+let ppd = 100;
 
 function step(prev) {
   var next = [];
@@ -57,6 +59,19 @@ function seedToMatrix(seed) {
   return(matrix);
 }
 
+function clipFunc(hue, sat, minLight, maxLight) {
+  drawingContext.clip();
+  for (var j = 0; j < canvasSizeOg/ppd; j++) {
+    for (var k = 0; k < canvasSizeOg/ppd; k++) {
+      noStroke();
+      fill(hue, sat, random(minLight, maxLight));
+      rect(ppd*j, ppd*k, ppd, ppd);
+    }
+  }
+  drawingContext.restore();
+  drawingContext.save();
+}
+
 function drawGlyph(matrix, ppd, fillColor, strokeColor, backgroundColor, moveFactor) {
   let canvasSize = Math.ceil(matrix.length * Math.SQRT2);
   canvasSize += canvasSize % 2;
@@ -66,9 +81,50 @@ function drawGlyph(matrix, ppd, fillColor, strokeColor, backgroundColor, moveFac
   const moveX = (width - matrix.length * ppd) / 2;
   const moveY = (width - matrix.length * ppd) / moveFactor;
   
+  drawingContext.save();
   noStroke();
   fill(backgroundColor);
   let roundedness = 300;
+
+  var minBackgroundLight = 0;
+  var maxBackgroundLight = 100;
+  if (lightness(backgroundColor) < 10) {
+    minBackgroundLight = 0;
+    maxBackgroundLight = 30;
+  } else if (lightness(backgroundColor) > 90) {
+    minBackgroundLight = 80;
+    maxBackgroundLight = 100;
+  } else {
+    minBackgroundLight = lightness(backgroundColor) - 10;
+    maxBackgroundLight = lightness(backgroundColor) + 10;
+  }
+
+  var minFillLight = 0;
+  var maxFillLight = 100;
+  if (lightness(fillColor) < 10) {
+    minFillLight = 0;
+    maxFillLight = 30;
+  } else if (lightness(fillColor) > 90) {
+    minFillLight = 80;
+    maxFillLight = 100;
+  } else {
+    minFillLight = lightness(fillColor) - 10;
+    maxFillLight = lightness(fillColor) + 10;
+  }
+
+  var minStrokeLight = 0;
+  var maxStrokeLight = 100;
+  if (lightness(strokeColor) < 10) {
+    minStrokeLight = 0;
+    maxStrokeLight = 30;
+  } else if (lightness(strokeColor) > 90) {
+    minStrokeLight = 80;
+    maxStrokeLight = 100;
+  } else {
+    minStrokeLight = lightness(strokeColor) - 10;
+    maxStrokeLight = lightness(strokeColor) + 10;
+  }
+
   if (moveFactor == 2) {
     strokeWeight(4);
     stroke(strokeColor);
@@ -80,12 +136,22 @@ function drawGlyph(matrix, ppd, fillColor, strokeColor, backgroundColor, moveFac
     fill(backgroundColor);
 
     rect(0, 0, width * 0.5, height * 0.5, 0, roundedness, 0, roundedness);
+    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
+
     rect(0, height * 0.5, width * 0.5, height * 0.5, 0, 0, 0, roundedness);
+    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
+
     rect(width * 0.5, 0, width * 0.5, height * 0.5, roundedness, roundedness, roundedness, 0);
+    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
+
     rect(width * 0.5, height * 0.5, width * 0.5, height * 0.5, 0, 0, roundedness, 0);
+    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
   } else {
     rect(0, 0, width * 0.5, height * 0.5, roundedness, 0, roundedness, roundedness);
+    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
+
     rect(width * 0.5, 0, width * 0.5, height * 0.5, 0, roundedness, roundedness, roundedness);
+    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
   }
   
   for (let y = 0; y < matrix.length; y++) {
@@ -93,12 +159,16 @@ function drawGlyph(matrix, ppd, fillColor, strokeColor, backgroundColor, moveFac
     const glyphSizeFactor = 1;
     for (let x = 0; x < row.length; x++) {
       if (row[x] == 1) {
-        fill(fillColor);
+        fill(hue(fillColor), saturation(fillColor), random(minFillLight, maxFillLight));
         rect(moveX + x * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
+
+        fill(hue(fillColor), saturation(fillColor), random(minFillLight, maxFillLight));
         rect(moveX + (matrix.length - x - 1) * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
       } else if (countNeighbors(matrix, x, y) > 0) {
-        fill(strokeColor);
+        fill(hue(strokeColor), saturation(strokeColor), random(minStrokeLight, maxStrokeLight));
         rect(moveX + x * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
+
+        fill(hue(strokeColor), saturation(strokeColor), random(minStrokeLight, maxStrokeLight));
         rect(moveX + (matrix.length - x - 1) * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
       } else {
         continue;
@@ -131,14 +201,11 @@ function setup() {
 
 function generateArt() {
 
-  let canvasSizeOg = 3200;
   createCanvas(canvasSizeOg, canvasSizeOg);
   colorMode(HSL);
 
   canvas.style.width = 'auto';
   canvas.style.height = '100%';
-
-  let ppd = 100;
 
   background(0, 0, 50);
   
