@@ -193,6 +193,7 @@ let editions = {
   "ten": "ten",
   "twenty": "twenty",
   "forty": "forty",
+  // "deepstqte": "deepstqte",
 };
 
 function setup() {
@@ -329,6 +330,17 @@ function generateArt() {
     }
     glyphBackgroundColor = color(0,0,0);
     glyphStrokeColor = color(0, 0, 100);
+  } else if (document.getElementById('edition').value == "deepstqte") {
+    glyphBackgroundColor = color(211, 20, 44);
+    glyphStrokeColor = color(0, 0, 0);
+    glyphFillColor = color(0, 0,15);
+    for (var j = 0; j < canvasSizeOg/ppd; j++) {
+      for (var k = 0; k < canvasSizeOg/ppd; k++) {
+        noStroke();
+        fill(211, 20, random(74, 94));
+        rect(ppd*j, ppd*k, ppd, ppd);
+      }
+    }
   }
   
   translate(canvasSizeOg/4, ppd*8);
