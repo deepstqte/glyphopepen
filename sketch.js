@@ -64,7 +64,11 @@ function clipFunc(hue, sat, minLight, maxLight) {
   for (var j = 0; j < canvasSizeOg/ppd; j++) {
     for (var k = 0; k < canvasSizeOg/ppd; k++) {
       noStroke();
-      fill(hue, sat, random(minLight, maxLight));
+      if (document.getElementById('edition').value == "rainbow") {
+        fill(random(360), 100, random(80, 100));
+      } else {
+        fill(hue, sat, random(minLight, maxLight));
+      }
       rect(ppd*j, ppd*k, ppd, ppd);
     }
   }
@@ -83,6 +87,7 @@ function drawGlyph(matrix, ppd, fillColor, strokeColor, backgroundColor, moveFac
   
   drawingContext.save();
   noStroke();
+
   fill(backgroundColor);
   let roundedness = 300;
 
@@ -129,6 +134,9 @@ function drawGlyph(matrix, ppd, fillColor, strokeColor, backgroundColor, moveFac
     strokeWeight(4);
     stroke(strokeColor);
     noStroke();
+    if (document.getElementById('edition').value == "rainbow") {
+      fillColor = color(random(360), 100, 69)
+    }
     fill(fillColor);
     rect(width, -ppd, ppd, ppd);
     noStroke();
@@ -159,13 +167,23 @@ function drawGlyph(matrix, ppd, fillColor, strokeColor, backgroundColor, moveFac
     const glyphSizeFactor = 1;
     for (let x = 0; x < row.length; x++) {
       if (row[x] == 1) {
-        fill(hue(fillColor), saturation(fillColor), random(minFillLight, maxFillLight));
+        if (document.getElementById('edition').value == "rainbow") {
+          fill(random(360), 100, random(60, 98));
+        } else {
+          fill(hue(fillColor), saturation(fillColor), random(minFillLight, maxFillLight));
+        }
+
         rect(moveX + x * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
 
         // fill(hue(fillColor), saturation(fillColor), random(minFillLight, maxFillLight));
         rect(moveX + (matrix.length - x - 1) * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
       } else if (countNeighbors(matrix, x, y) > 0) {
-        fill(hue(strokeColor), saturation(strokeColor), random(minStrokeLight, maxStrokeLight));
+        if (document.getElementById('edition').value == "rainbow") {
+          fill(0,0,random(60, 80));
+        } else {
+          fill(hue(strokeColor), saturation(strokeColor), random(minStrokeLight, maxStrokeLight));
+        }
+
         rect(moveX + x * ppd, moveY + y * ppd, ppd * glyphSizeFactor, ppd * glyphSizeFactor);
 
         // fill(hue(strokeColor), saturation(strokeColor), random(minStrokeLight, maxStrokeLight));
@@ -194,6 +212,7 @@ let editions = {
   "twenty": "twenty",
   "forty": "forty",
   // "deepstqte": "deepstqte",
+  "rainbow": "rainbow",
 };
 
 function setup() {
@@ -331,13 +350,24 @@ function generateArt() {
     glyphBackgroundColor = color(0,0,0);
     glyphStrokeColor = color(0, 0, 100);
   } else if (document.getElementById('edition').value == "deepstqte") {
-    glyphBackgroundColor = color(211, 20, 44);
+    glyphBackgroundColor = color(205, 14, 46);
     glyphStrokeColor = color(0, 0, 0);
     glyphFillColor = color(0, 0,15);
     for (var j = 0; j < canvasSizeOg/ppd; j++) {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
         noStroke();
-        fill(211, 20, random(74, 94));
+        fill(207, 22, random(74, 94));
+        rect(ppd*j, ppd*k, ppd, ppd);
+      }
+    }
+  } else if (document.getElementById('edition').value == "rainbow") {
+    glyphBackgroundColor = color(205, 14, 46);
+    glyphStrokeColor = color(0, 0, 0);
+    glyphFillColor = color(0, 0,15);
+    for (var j = 0; j < canvasSizeOg/ppd; j++) {
+      for (var k = 0; k < canvasSizeOg/ppd; k++) {
+        noStroke();
+        fill(random(360), 50, random(90, 100));
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
