@@ -205,6 +205,7 @@ function countNeighbors(matrix, x, y) {
 }
 
 let editions = {
+  // "mustard": "mustard",
   "one": "one",
   "four": "four",
   "five": "five",
@@ -253,6 +254,17 @@ function generateArt() {
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
+  } else if (document.getElementById('edition').value == "mustard") {
+    glyphBackgroundColor = color(42, 70, 70);
+    glyphStrokeColor = color(42, 70, 70);
+    glyphFillColor = color(42, 70, 70);
+    for (var j = 0; j < canvasSizeOg/ppd; j++) {
+      for (var k = 0; k < canvasSizeOg/ppd; k++) {
+        noStroke();
+        fill(42, 70, random(70, 80));
+        rect(ppd*j, ppd*k, ppd, ppd);
+      }
+    }
   } else if (document.getElementById('edition').value == "four") {
     glyphBackgroundColor = color(226, 100, 56);
     glyphStrokeColor = color(0, 0, 100);
@@ -276,7 +288,7 @@ function generateArt() {
       }
     }
   } else if (document.getElementById('edition').value == "ten") {
-    var coinflip = random(2);
+    var coinflip = random(1);
     if (coinflip < 1) {
       glyphBackgroundColor = color(294,100,72);
       glyphStrokeColor = color(332, 80, 48);
@@ -289,11 +301,12 @@ function generateArt() {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
         noStroke();
         fill(204, 9, random(90, 100));
+        // fill(294,100,72);
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
   } else if (document.getElementById('edition').value == "twenty") {
-    var coinflip = random(6);
+    var coinflip = random(1);
     if (coinflip < 1) {
       glyphBackgroundColor = color(175,94,82);
       glyphStrokeColor = color(264, 91, 83);
@@ -323,6 +336,7 @@ function generateArt() {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
         noStroke();
         fill(175, 94, random(90, 100));
+        // fill(175,94,82);
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
