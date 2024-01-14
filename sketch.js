@@ -1,7 +1,7 @@
 const hexToDecimal = hex => parseInt(hex, 16);
 const genRanHex = size => [...Array(size)].map(() => Math.floor(Math.random() * 16).toString(16)).join('');
 let canvasSizeOg = 3200;
-let ppd = 100;
+let ppd = 160;
 
 function step(prev) {
   var next = [];
@@ -82,8 +82,8 @@ function drawGlyph(matrix, ppd, fillColor, strokeColor, backgroundColor, moveFac
   const width = canvasSize * ppd;
   const height = canvasSize * ppd;
   let str = '';
-  const moveX = (width - matrix.length * ppd) / 2;
-  const moveY = (width - matrix.length * ppd) / moveFactor;
+  const moveX = 0;
+  const moveY = 0;
   
   drawingContext.save();
   noStroke();
@@ -138,28 +138,28 @@ function drawGlyph(matrix, ppd, fillColor, strokeColor, backgroundColor, moveFac
       fillColor = color(random(360), 100, 69)
     }
     fill(fillColor);
-    rect(width, -ppd, ppd, ppd);
+    rect(10*ppd, -ppd, ppd, ppd);
     noStroke();
     
     fill(backgroundColor);
 
-    rect(0, 0, width * 0.5, height * 0.5, 0, roundedness, 0, roundedness);
-    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
+    // rect(0, 0, width * 0.5, height * 0.5, 0, roundedness, 0, roundedness);
+    // clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
 
-    rect(0, height * 0.5, width * 0.5, height * 0.5, 0, 0, 0, roundedness);
-    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
+    // rect(0, height * 0.5, width * 0.5, height * 0.5, 0, 0, 0, roundedness);
+    // clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
 
-    rect(width * 0.5, 0, width * 0.5, height * 0.5, roundedness, roundedness, roundedness, 0);
-    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
+    // rect(width * 0.5, 0, width * 0.5, height * 0.5, roundedness, roundedness, roundedness, 0);
+    // clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
 
-    rect(width * 0.5, height * 0.5, width * 0.5, height * 0.5, 0, 0, roundedness, 0);
-    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
+    // rect(width * 0.5, height * 0.5, width * 0.5, height * 0.5, 0, 0, roundedness, 0);
+    // clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
   } else {
-    rect(0, 0, width * 0.5, height * 0.5, roundedness, 0, roundedness, roundedness);
-    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
+    // rect(0, 0, width * 0.5, height * 0.5, roundedness, 0, roundedness, roundedness);
+    // clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
 
-    rect(width * 0.5, 0, width * 0.5, height * 0.5, 0, roundedness, roundedness, roundedness);
-    clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
+    // rect(width * 0.5, 0, width * 0.5, height * 0.5, 0, roundedness, roundedness, roundedness);
+    // clipFunc(hue(backgroundColor), saturation(backgroundColor), minBackgroundLight, maxBackgroundLight);
   }
   
   for (let y = 0; y < matrix.length; y++) {
@@ -250,7 +250,8 @@ function generateArt() {
     for (var j = 0; j < canvasSizeOg/ppd; j++) {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
         noStroke();
-        fill(0, 0, random(90, 100));
+        // fill(0, 0, random(90, 100));
+        fill(0, 0, random(0, 20));
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
@@ -272,7 +273,8 @@ function generateArt() {
     for (var j = 0; j < canvasSizeOg/ppd; j++) {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
         noStroke();
-        fill(226, 100, random(90, 100));
+        // fill(226, 100, random(90, 100));
+        fill(226, 100, random(46, 66));
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
@@ -283,7 +285,8 @@ function generateArt() {
     for (var j = 0; j < canvasSizeOg/ppd; j++) {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
         noStroke();
-        fill(354, 85, random(90, 100));
+        // fill(354, 85, random(90, 100));
+        fill(354, 85, random(46, 66));
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
@@ -300,8 +303,8 @@ function generateArt() {
     for (var j = 0; j < canvasSizeOg/ppd; j++) {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
         noStroke();
-        fill(204, 9, random(90, 100));
-        // fill(294,100,72);
+        // fill(204, 9, random(90, 100));
+        fill(294,100,random(70, 80));
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
@@ -335,7 +338,7 @@ function generateArt() {
     for (var j = 0; j < canvasSizeOg/ppd; j++) {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
         noStroke();
-        fill(175, 94, random(90, 100));
+        fill(175, 94, random(72, 92));
         // fill(175,94,82);
         rect(ppd*j, ppd*k, ppd, ppd);
       }
@@ -347,7 +350,7 @@ function generateArt() {
       for (var j = 0; j < canvasSizeOg/ppd; j++) {
         for (var k = 0; k < canvasSizeOg/ppd; k++) {
           noStroke();
-          fill(357, 85, random(70, 90));
+          fill(357, 85, random(45, 65));
           rect(ppd*j, ppd*k, ppd, ppd);
         }
       }
@@ -356,7 +359,7 @@ function generateArt() {
       for (var j = 0; j < canvasSizeOg/ppd; j++) {
         for (var k = 0; k < canvasSizeOg/ppd; k++) {
           noStroke();
-          fill(116, 47, random(70, 90));
+          fill(116, 47, random(30, 50));
           rect(ppd*j, ppd*k, ppd, ppd);
         }
       }
@@ -387,11 +390,11 @@ function generateArt() {
     }
   }
   
-  translate(canvasSizeOg/4, ppd*8);
+  translate(canvasSizeOg/4, ppd*5);
   
   drawGlyph(matrix, ppd, glyphFillColor, glyphStrokeColor, glyphBackgroundColor, 2);
   
-  translate(0, ppd*20);
+  translate(0, ppd*13);
   
   drawGlyph(matrix, ppd, glyphFillColor, glyphStrokeColor, glyphBackgroundColor, 6);
 }
