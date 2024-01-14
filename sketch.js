@@ -212,7 +212,7 @@ let editions = {
   "ten": "ten",
   "twenty": "twenty",
   "forty": "forty",
-  // "deepstqte": "deepstqte",
+  "1723": "1723",
   "rainbow": "rainbow",
 };
 
@@ -366,10 +366,10 @@ function generateArt() {
     }
     glyphBackgroundColor = color(0,0,0);
     glyphStrokeColor = color(0, 0, 100);
-  } else if (document.getElementById('edition').value == "deepstqte") {
+  } else if (document.getElementById('edition').value == "1723") {
     glyphBackgroundColor = color(205, 14, 46);
-    glyphStrokeColor = color(0, 0, 0);
-    glyphFillColor = color(0, 0,15);
+    glyphStrokeColor = color(0, 0, 15);
+    glyphFillColor = color(205, 14, 46);
     for (var j = 0; j < canvasSizeOg/ppd; j++) {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
         noStroke();
