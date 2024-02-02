@@ -214,6 +214,7 @@ let editions = {
   "forty": "forty",
   "1723": "1723",
   "rainbow": "rainbow",
+  "farcaster": "farcaster",
 };
 
 function setup() {
@@ -385,6 +386,18 @@ function generateArt() {
       for (var k = 0; k < canvasSizeOg/ppd; k++) {
         noStroke();
         fill(random(360), 50, random(90, 100));
+        rect(ppd*j, ppd*k, ppd, ppd);
+      }
+    }
+  } else if (document.getElementById('edition').value == "farcaster") {
+    glyphBackgroundColor = color(226, 100, 56);
+    glyphStrokeColor = color(0, 0, 100);
+    glyphFillColor = color(0, 0,0);
+    for (var j = 0; j < canvasSizeOg/ppd; j++) {
+      for (var k = 0; k < canvasSizeOg/ppd; k++) {
+        noStroke();
+        // fill(226, 100, random(90, 100));
+        fill(261, 55, random(51, 71));
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
