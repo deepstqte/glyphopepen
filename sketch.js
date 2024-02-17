@@ -215,6 +215,7 @@ let editions = {
   "1723": "1723",
   "rainbow": "rainbow",
   "farcaster": "farcaster",
+  "degen": "degen",
 };
 
 function setup() {
@@ -398,6 +399,18 @@ function generateArt() {
         noStroke();
         // fill(226, 100, random(90, 100));
         fill(261, 55, random(51, 71));
+        rect(ppd*j, ppd*k, ppd, ppd);
+      }
+    }
+  } else if (document.getElementById('edition').value == "degen") {
+    glyphBackgroundColor = color(0, 0, 0);
+    glyphStrokeColor = color(75, 62, 100);
+    glyphFillColor = color(360, 100, 48);
+    for (var j = 0; j < canvasSizeOg/ppd; j++) {
+      for (var k = 0; k < canvasSizeOg/ppd; k++) {
+        noStroke();
+        // fill(226, 100, random(90, 100));
+        fill(50, 97, random(63, 83));
         rect(ppd*j, ppd*k, ppd, ppd);
       }
     }
